@@ -1,0 +1,3 @@
+[submodule "ai-sdk"]
+	path = ai-sdk
+	url = https://github.com/zhuolugmail/vercel-ai-sdk

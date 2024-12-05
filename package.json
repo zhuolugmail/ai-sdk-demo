@@ -10,6 +10,6 @@
   "description": "",
   "workspaces": [
     "./ai-app",
-    "./ai-sdk"
+    "./ai-sdk/packages/*"
   ]
 }

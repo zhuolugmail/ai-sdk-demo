@@ -7,16 +7,5 @@
   },
   "author": "",
   "license": "ISC",
-  "description": "",
-  "workspaces": [
-    "./ai-app",
-    "./ai-sdk/packages/provider",
-    "./ai-sdk/packages/provider-utils",
-    "./ai-sdk/packages/openai",
-    "./ai-sdk/packages/openai-compatible",
-    "./ai-sdk/packages/mistral",
-    "./ai-sdk/packages/ui-utils",
-    "./ai-sdk/packages/react",
-    "./ai-sdk/packages/ai"
-  ]
+  "description": ""
 }

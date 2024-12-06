@@ -1,6 +1,6 @@
 
 import { streamText } from 'ai';
-import { createMistral } from '@ai-sdk/mistral';
+import { createMistral } from '../../../../../ai-sdk/packages/mistral/src';
 
 const mistral = createMistral({
     // custom settings

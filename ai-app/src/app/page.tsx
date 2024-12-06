@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useChat } from '../../../node_modules/@ai-sdk/react/src/use-chat';
+import { useChat } from '../../../ai-sdk/packages/react/src/use-chat';
 
 export default function Chat() {
   const {

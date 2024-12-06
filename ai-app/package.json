@@ -9,8 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ai-sdk/mistral": "^1001.0.3",
-    "ai": "^1004.0.11",
+    "ai": "^4.0.11",
     "next": "14.2.20",
     "react": "^18",
     "react-dom": "^18",

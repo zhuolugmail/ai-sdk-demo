@@ -5,6 +5,9 @@ import { useChat } from '../../../ai-sdk/packages/react/src/use-chat';
 
 export default function Chat() {
   const {
+    isLoading,
+    stop,
+    reload,
     messages,
     input, system,
     handleUserChange,
@@ -40,7 +43,29 @@ export default function Chat() {
               placeholder="User prompt..."
               onChange={handleUserChange}
             />
-            <button type='submit' className="border mt-4 w-40 p-2 rounded shadow-lg">Submit</button>
+            {isLoading &&
+              (<button onClick={stop} className="border mt-4 w-40 p-2 rounded shadow-lg">
+                Cancel
+              </button>)
+            }
+            {!isLoading && (input || system) &&
+              (<button type='submit' className="border mt-4 w-40 p-2 rounded shadow-lg">
+                Submit
+              </button>)}
+            {!isLoading && (!input && !system) && (messages.length > 0) &&
+              (
+                <button onClick={reload} className="border mt-4 w-40 p-2 rounded shadow-lg">
+                  Reload
+                </button>
+              )
+            }
+            {!isLoading && (!input && !system) && (messages.length === 0) &&
+              (
+                (<button type='submit' className="border mt-4 w-40 p-2 rounded shadow-lg">
+                  Submit
+                </button>)
+              )
+            }
           </div>
         </form>
       </div>

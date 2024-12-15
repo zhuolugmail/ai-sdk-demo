@@ -1,6 +1,7 @@
 "use client";
 
-import { JSONValue } from "llamaindex";
+/* import { JSONValue } from "llamaindex"; */
+import { JSONValue } from "ai";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import {
@@ -44,8 +45,8 @@ export function useFile() {
   };
 
   const reset = () => {
-    imageUrl && setImageUrl(null);
-    files.length && setFiles([]);
+    const _unused1 = imageUrl && setImageUrl(null);
+    const _unused2 = files.length && setFiles([]);
   };
 
   const uploadContent = async (

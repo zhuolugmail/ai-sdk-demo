@@ -1,0 +1,21 @@
+diff --git a/node_modules/@llamaindex/ollama/dist/index.js b/node_modules/@llamaindex/ollama/dist/index.js
+index af39010..2e3c8ef 100644
+--- a/node_modules/@llamaindex/ollama/dist/index.js
++++ b/node_modules/@llamaindex/ollama/dist/index.js
+@@ -423,6 +423,7 @@ class Ollama extends ToolCallLLM {
+         }, _initProto(this);
+         this.model = params.model;
+         this.ollama = new Ollama$1(params.config);
++        this.maxTokens = params?.maxTokens || 4096;
+         if (params.options) {
+             this.options = {
+                 ...this.options,
+@@ -436,7 +437,7 @@ class Ollama extends ToolCallLLM {
+             model: this.model,
+             temperature: temperature,
+             topP: top_p,
+-            maxTokens: this.options.num_ctx,
++            maxTokens: this.maxTokens,
+             contextWindow: num_ctx,
+             tokenizer: undefined
+         };

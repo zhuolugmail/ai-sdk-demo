@@ -2,6 +2,11 @@
 const nextConfig = {
     webpack: (config) => {
         config.resolve.alias.canvas = false;
+        config.resolve.alias = {
+            ...config.resolve.alias,
+            sharp$: false,
+            "onnxruntime-node$": false,
+        };
 
         return config;
     },

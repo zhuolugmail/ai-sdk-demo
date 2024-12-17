@@ -25,10 +25,14 @@ export async function POST(req: Request) {
         }
     );
 
-    const chatHistory = new ChatSummaryMemoryBuffer({ llm });
-    const chatEngine = new SimpleChatEngine({ llm });
+    const previousMessages = messages.slice(0, messages.length - 1)
+    const message = messages[messages.length - 1].content
 
-    const message = [messages[messages.length - 1]]
+    const chatHistory = new ChatSummaryMemoryBuffer({
+        messages: previousMessages,
+        llm 
+    });
+    const chatEngine = new SimpleChatEngine({ llm });
 
     const stream = await chatEngine.chat({
         message,

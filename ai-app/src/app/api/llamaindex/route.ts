@@ -1,7 +1,7 @@
 
 import {
     ChatSummaryMemoryBuffer,
-    Ollama,
+    MistralAI,
     SimpleChatEngine,
 } from "llamaindex";
 
@@ -12,7 +12,7 @@ export async function POST(req: Request) {
 
     // Set maxTokens to 75% of the context window size of 4096
     // This will trigger the summarizer once the chat history reaches 25% of the context window size (1024 tokens)
-    const llm = new Ollama(
+    /* const llm = new Ollama(
         {
             model: process.env.MODEL_NAME,
             maxTokens: 4096,
@@ -24,6 +24,11 @@ export async function POST(req: Request) {
             }
         }
     );
+    */
+    const llm = new MistralAI({
+        model: process.env.MODEL_NAME,
+        maxTokens: 4096
+    })
 
     const previousMessages = messages.slice(0, messages.length - 1)
     const message = messages[messages.length - 1].content

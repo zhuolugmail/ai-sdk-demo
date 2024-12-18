@@ -1,0 +1,51 @@
+diff --git a/node_modules/llamaindex/dist/llm/mistral.js b/node_modules/llamaindex/dist/llm/mistral.js
+index d0ba31b..41c411e 100644
+--- a/node_modules/llamaindex/dist/llm/mistral.js
++++ b/node_modules/llamaindex/dist/llm/mistral.js
+@@ -29,6 +29,7 @@ export class MistralAISession {
+         const { Mistral } = await import("@mistralai/mistralai");
+         if (!this.client) {
+             this.client = new Mistral({
++                serverURL: process.env.MISTRAL_URL,
+                 apiKey: this.apiKey
+             });
+         }
+@@ -58,12 +59,17 @@ export class MistralAISession {
+         this.session = new MistralAISession(init);
+     }
+     get metadata() {
++        let contextWindow;
++        if (this.model in ALL_AVAILABLE_MISTRAL_MODELS)
++            contextWindow = ALL_AVAILABLE_MISTRAL_MODELS[this.model].contextWindow
++        else
++            contextWindow = 32000
+         return {
+             model: this.model,
+             temperature: this.temperature,
+             topP: this.topP,
+             maxTokens: this.maxTokens,
+-            contextWindow: ALL_AVAILABLE_MISTRAL_MODELS[this.model].contextWindow,
++            contextWindow,
+             tokenizer: undefined
+         };
+     }
+@@ -96,11 +102,16 @@ export class MistralAISession {
+     }
+     async *streamChat({ messages }) {
+         const client = await this.session.getClient();
+-        const chunkStream = await client.chatStream(this.buildParams(messages));
++        const stream = await client.chat.stream(this.buildParams(messages));
++        
+         //Indices
+         let idx_counter = 0;
+-        for await (const part of chunkStream){
+-            if (!part.choices.length) continue;
++        for await (const event of stream) {
++            const content = event.data?.choices[0]?.delta.content;
++            if (!content) {
++              continue;
++            }
++            const part = event.data
+             part.choices[0].index = idx_counter;
+             idx_counter++;
+             yield {
